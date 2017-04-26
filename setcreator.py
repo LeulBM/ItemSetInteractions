@@ -5,7 +5,7 @@ import itemlookup
 import sys
 import os
 from riotcall import league
-from pprint import pprint
+
 
 def main():
     r = league.item_static()
@@ -15,12 +15,16 @@ def main():
     else:
         allitems = r.json()                                             # take json from response
 
-    filefound = False
-    filepath = ''
+    if os.path.exists('C:\Riot Games\League of Legends\Config\Champions'):
+        filefound = True
+        filepath = 'C:\Riot Games\League of Legends\Config\Champions'
+    else:
+        filefound = False
+        filepath = ''
+
     while not filefound:
         filepath = input('Give the path to your League of Legends Folder\n')
         filepath += '\Config\Champions'
-        print(filepath)
 
         if not os.path.exists(filepath):
             sys.stderr.write('Invalid file location, please try again\n')
@@ -34,11 +38,10 @@ def main():
         champ = champ.replace(" ", "")
         if champ == 'Wukong':
             filepath2 = filepath + '\MonkeyKing\Recommended'
+        elif champ == 'Fiddlesticks':
+            filepath2 = filepath + '\FiddleSticks\Recommended'
         else:
             filepath2 = filepath + "\\" + champ + '\Recommended'
-
-        print(filepath2)
-
 
         if not os.path.exists(filepath2):
             print("Error in finding champions, please try again")
@@ -51,12 +54,13 @@ def main():
     while not validName:
         name = input('What would you like to name this item set?\n')
         testName = name[-2:]
+        nameisvalid = True
         for x in invalidendings:
             if x == testName:
-                print("Error: Cannot use file name ending in SR, TT, DM, ASC, or PG, please try again")
-                continue
-            else:
-                validName = True
+                nameisvalid = False
+                print("Invalid Name, name cannot end with SR, TT, DM, SC, or PG")
+        if nameisvalid:
+            validName = True
 
     d = {"title": name, "type": 'custom', "map": 'any', "mode": 'any', "priority": False, "sortrank": 0}
 
@@ -74,14 +78,13 @@ def main():
             if itemid != -1:
                 thisitem = {'id': itemid}
 
-
                 countdone = False
                 while not countdone:
                     itemcount = input('How many would you like to add? --> ')
                     try:
                         itemcount = int(itemcount)
                         if itemcount < 1:
-                            print('Error, item count must be greater than 0, try again\n')
+                            print('Error, item count must be greater than 0, try again')
                         else:
                             thisitem['count'] = itemcount
                             countdone = True
@@ -90,7 +93,7 @@ def main():
                         print('Error, must input an integer, try again')
 
                 itemlist.append(thisitem)
-                itemsdone = input('Would you like to add another item to this block? (y/n)')
+                itemsdone = input('Would you like to add another item to this block? (Y/n)')
                 if itemsdone == 'n':
                     itemdone = True
                     currentblock['items'] = itemlist
@@ -98,7 +101,7 @@ def main():
             else:
                 print('Could not find item, try again')
         blocklist.append(currentblock)
-        moreblock = input('Would you like to create another block? (y/n) ')
+        moreblock = input('Would you like to create another block? (Y/n) ')
         if moreblock == 'n':
             done = True
             d['blocks'] = blocklist
