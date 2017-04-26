@@ -1,0 +1,127 @@
+{
+    "map": "SR",
+    "blocks": [
+        {
+            "items": [
+                {
+                    "id": "1056",
+                    "count": 1
+                },
+                {
+                    "id": "2003",
+                    "count": 2
+                },
+                {
+                    "id": "3340",
+                    "count": 1
+                },
+                {
+                    "id": "3341",
+                    "count": 1
+                },
+                {
+                    "id": "3363",
+                    "count": 1
+                }
+            ],
+            "type": "Highest Win % Starters (43.64% wins - 2124 games)"
+        },
+        {
+            "items": [
+                {
+                    "id": "3115",
+                    "count": 1
+                },
+                {
+                    "id": "3116",
+                    "count": 1
+                },
+                {
+                    "id": "3020",
+                    "count": 1
+                },
+                {
+                    "id": "3089",
+                    "count": 1
+                },
+                {
+                    "id": "3135",
+                    "count": 1
+                },
+                {
+                    "id": "3285",
+                    "count": 1
+                }
+            ],
+            "type": "Highest Win % Core Build (44.14% wins - 447 games)"
+        },
+        {
+            "items": [
+                {
+                    "id": "2003",
+                    "count": 1
+                },
+                {
+                    "id": "2004",
+                    "count": 1
+                },
+                {
+                    "id": "2043",
+                    "count": 1
+                },
+                {
+                    "id": "2031",
+                    "count": 1
+                },
+                {
+                    "id": "2032",
+                    "count": 1
+                },
+                {
+                    "id": "2033",
+                    "count": 1
+                },
+                {
+                    "id": "2138",
+                    "count": 1
+                },
+                {
+                    "id": "2140",
+                    "count": 1
+                },
+                {
+                    "id": "2139",
+                    "count": 1
+                }
+            ],
+            "type": "Consumables | Frequent: W.Q.E.Q - Q>W>E"
+        },
+        {
+            "items": [
+                {
+                    "id": "3361",
+                    "count": 1
+                },
+                {
+                    "id": "3362",
+                    "count": 1
+                },
+                {
+                    "id": "3364",
+                    "count": 1
+                },
+                {
+                    "id": "3363",
+                    "count": 1
+                }
+            ],
+            "type": "Trinkets | Wins: W.Q.Q.E - Q>W>E"
+        }
+    ],
+    "title": "CGG Middle Highest Win 6.18",
+    "priority": false,
+    "mode": "any",
+    "type": "custom",
+    "sortrank": 1,
+    "champion": "Azir"
+}
