@@ -250,7 +250,6 @@ def lang_static():
 
 # Map Static - returns information on maps
 # Args: N/A
-# NOTE: CURRENTLY 500'S ON EVERY REQUEST, todo: INVESTIGATE
 def map_static():
     url = nabase + '/lol/static-data/v3/maps' + key
     r = requests.get(url)
