@@ -19,4 +19,4 @@ The RiotCall and specifically league file provides a series of wrapper functions
 ## Sounds good, what do I need to run it?
 You'll only need two things to run this. The only dependencies for this are Python 3 and the [Requests Package](http://docs.python-requests.org/en/master/). You can install it by simply running $ pip install requests in your terminal. Once you have the dependencies, to run the tool all you need to do to run it is $ ./setcreator.py
 
-Goodluck Summoners.dada
+Goodluck Summoners
