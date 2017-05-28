@@ -7,10 +7,6 @@ from pprint import pprint
 # Current base URL for V3 NA queries
 nabase = 'https://na1.api.riotgames.com'
 
-# Base URL for V2.x NA (And some 1.x NA) queries
-na2base = 'https://na.api.riotgames.com'
-
-staticbase = 'https://global.api.pvp.net'
 key = 'api_key=RGAPI-5593b315-1fc8-4ad8-be9e-45474b1f7308'
 
 # Note on these calls: Many will 404 if the requested info is "invalid". For example,
