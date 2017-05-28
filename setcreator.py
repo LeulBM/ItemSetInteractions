@@ -38,7 +38,7 @@ def main():
         champ = champ.replace(" ", "")                          # Remove irrelevant special characters
         champ = champ.replace("'", "")
         champ = champ.replace(".", "")
-        if champ == 'Wukong':                                   # Catch Special file names (Thanks Rito)
+        if champ == 'Wukong':                                   # Catch Special file names
             filepath2 = filepath + '\MonkeyKing\Recommended'
         elif champ == 'Fiddlesticks':
             filepath2 = filepath + '\FiddleSticks\Recommended'
