@@ -1,6 +1,6 @@
 ## Command Line Item Sets: Bronze to Challenger in 30 days
 
-The recent Leage of Legends client update removed a much beloved feature of the game, the Item Set. Now you can't create your Item Sets with the petty interface you use to be able to use. That sucks right?
+The recent League of Legends client update removed a much beloved feature of the game, the Item Set. Now you can't create your Item Sets with the petty interface you use to be able to use. That sucks right?
 
 #### WRONG
 
@@ -11,7 +11,7 @@ Take the Elo thats rightfully yours.
 # Win
 
 ## But Forreal, how does it work?
-There are actually a number of tools here. The primary one is the Item Set Creator, which makes use of much of the rest of the package. The Creator checks for your League of Legends Folder, and then prompts you for information on the item set, such as which champion it's for, what items,and how many of which item to add.
+There are actually a number of tools here. The primary one is the Item Set Creator, which makes use of much of the rest of the package. The Creator checks for your League of Legends Folder, and then prompts you for information on the item set, such as which champion it's for, what items, and how many of which item to add.
 Item Set Reader is a way to read the raw .json flies and convert them from id numbers to human readable text.
 Item Lookup is a way to find an item Name by its ID and vice versa.d
 The RiotCall and specifically league file provides a series of wrapper functions around every single up-to-date API endpoint offered. It returns a HTTP response object you can work with in your code

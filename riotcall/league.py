@@ -14,32 +14,24 @@ key = 'api_key=RGAPI-5593b315-1fc8-4ad8-be9e-45474b1f7308'
 # is no information to pull and thus the RESTful call 404's. Please keep this in mind
 # when parsing responses.
 
-
 # Champion Mastery V3
-def mastery_by_summoner(sID):
-    """
-   Mastery by Summoner
+def mastery(sID, cID=None):
+   """
+   Mastery
 
-    :param sID: Summoner ID
-    :return: Mastery points for Summoner sorted in descending order
-    """
-    url = nabase + '/lol/champion-mastery/v3/champion-masteries/by-summoner/' + str(sID) + '?' + key
-    r = requests.get(url)
-    return r
-
-
-def mastery_by_champ(sID,cID):
-    """
-    Mastery by Champion
-
-    :param sID: Summoner ID
-    :param cID: Champion ID
-    :return: A summoner's Mastery Score for a given champ
-    """
-    url = nabase + '/lol/champion-mastery/v3/champion-masteries/by-summoner/' + str(sID) + \
-          '/by-champion/' + str(cID) + '?' + '?' + key
-    r = requests.get(url)
-    return r
+   :param sID: Summoner ID
+   :param cID: Champion ID*
+   :return: A summoner's champion mastery report, cID will show only that champ
+   """
+   if cID is not None:
+      url = nabase + '/lol/champion-mastery/v3/champion-masteries/by-summoner/' \
+       + str(sID) + '/by-champion/' + str(cID) + '?'
+   else:
+      url = nabase + '/lol/champion-mastery/v3/champion-masteries/by-summoner/' \
+       + str(sID) + '?'
+   url += key
+   r = requests.get(url)
+   return r
 
 
 def total_mastery(sID):
@@ -49,31 +41,25 @@ def total_mastery(sID):
     :param sID: Summoner ID
     :return: The total mastery score of a summoner as an int
     """
-    url = nabase + '/lol/champion-mastery/v3/scores/by-summoner/' + str(sID) + '?' + '?' + key
+    url = nabase + '/lol/champion-mastery/v3/scores/by-summoner/' + str(sID) + \
+      '?' + key
     r = requests.get(url)
     return r
 
 
 # Champion V3 (Status info: Free to Play, botEnabled etc.)
-def champ_status_all():
+def champ_status(cID=None):
     """
-    Champ Status All
-
-    :return: Status info on every champ
-    """
-    url = nabase + '/lol/platform/v3/champions' + '?' + '?' + key
-    r = requests.get(url)
-    return r
-
-
-def champ_status_spec(cID):
-    """
-    Champ Status Specific
+    Champ Status
 
     :param cID: Champion ID
-    :return: Info on a specific champion
+    :return: Info on a specific champion if cID is given, or all champs if not
     """
-    url = nabase + '/lol/platform/v3/champions/' + str(cID) + '?' + key
+    if cID is not None:
+        url = nabase + '/lol/platform/v3/champions/' + str(cID) + '?'
+    else:
+        url = nabase + '/lol/platform/v3/champions' + '?'
+    url += key
     r = requests.get(url)
     return r
 
@@ -91,7 +77,7 @@ def league_by_summoner(sID):
     return r
 
 
-def spec_league_by_summ(sID):
+def spec_league_by_summoner(sID):
     """
     Specific League by Summoner
 
@@ -106,13 +92,13 @@ def spec_league_by_summ(sID):
 def challenger(qtype):
     """
     Challenger
-    
+
     :param qtype: queue type (solo, flex, or treeline)
     :return: League info for NA Challenger
     """
     url = nabase + '/lol/league/v3/challengerleagues/by-queue/'
     if str(qtype) == 'solo':
-        url += 'RANKED_SOLO_5X5'
+        url += 'RANKED_SOLO_5x5'
     elif str(qtype) == 'flex':
         url += 'RANKED_FLEX_SR'
     elif str(qtype) == 'treeline':
@@ -147,7 +133,7 @@ def master(qtype):
     return r
 
 
-# LOL Status V3
+# Status V3
 def shard_data():
     """
     Shard Data
@@ -168,6 +154,19 @@ def mastery_pages(sID):
     :return: Mastery Pages for the given summoner
     """
     url = nabase + '/lol/platform/v3/masteries/by-summoner/' + str(sID) + '?' + key
+    r = requests.get(url)
+    return r
+
+
+# Runes V3
+def rune_pages(sID):
+    """
+    Rune Pages
+
+    :param sID: Summoner ID
+    :return: a list of rune pages for the summoner
+    """
+    url = nabase + '/lol/platform/v3/runes/by-summoner/' + str(sID) + '?' + key
     r = requests.get(url)
     return r
 
@@ -217,7 +216,8 @@ def recent_matchlist(aID):
     :param aID: account ID
     :return: Mathlist of last 20 games
     """
-    url = nabase + '/lol/match/v3/matchlists/by-account/' + str(aID) + '/recent' + '?' + key
+    url = nabase + '/lol/match/v3/matchlists/by-account/' + str(aID) + \
+      '/recent' + '?' + key
     r = requests.get(url)
     return r
 
@@ -229,7 +229,8 @@ def tournament_mathlist(tCode):
     :param tCode: Tournament Code
     :return: A list of match IDs by tournament
     """
-    url = nabase + '/lol/match/v3/matches/by-tournament-code/' + str(tCode) + '/ids' + '?' + key
+    url = nabase + '/lol/match/v3/matches/by-tournament-code/' + str(tCode) + \
+     '/ids' + '?' + key
     r = requests.get(url)
     return r
 
@@ -242,20 +243,8 @@ def tournament_match(tCode, maID):
     :param maID: Match ID
     :return: a match's info from a tournament
     """
-    url = nabase + '/lol/match/v3/matches/' + str(maID) + '/by-tournament-code/' + str(tCode) + '?' + key
-    r = requests.get(url)
-    return r
-
-
-# Runes V3
-def rune_pages(sID):
-    """
-    Rune Pages
-
-    :param sID: Summoner ID
-    :return: a list of rune pages for the summoner
-    """
-    url = nabase + '/lol/platform/v3/runes/by-summoner/' + str(sID) + '?' + key
+    url = nabase + '/lol/match/v3/matches/' + str(maID) + '/by-tournament-' + \
+      'code/' + str(tCode) + '?' + key
     r = requests.get(url)
     return r
 
@@ -270,7 +259,8 @@ def current_game(sID):
     :param sID: Summoner ID
     :return: Info on the game a summoner is in, if possible
     """
-    url = nabase + '/lol/spectator/v3/active-games/by-summoner/' + str(sID) + '?' + key
+    url = nabase + '/lol/spectator/v3/active-games/by-summoner/' + str(sID) + \
+      '?' + key
     r = requests.get(url)
     return r
 
@@ -292,9 +282,9 @@ def champ_static(cID=None):
     :return: Static champion data
     """
     if cID is not None:
-        url = nabase + '/lol/static-data/v3/champions/' + str(cID)
+        url = nabase + '/lol/static-data/v3/champions/' + str(cID) + '?'
     else:
-        url = nabase + '/lol/static-data/v3/champions'
+        url = nabase + '/lol/static-data/v3/champions' + '?'
     url += key
     r = requests.get(url)
     return r
@@ -308,9 +298,9 @@ def item_static(iID=None):
     :return: Static item information
     """
     if iID is not None:
-        url = nabase + '/lol/static-data/v3/items/' + str(iID)
+        url = nabase + '/lol/static-data/v3/items/' + str(iID) + '?'
     else:
-        url = nabase + '/lol/static-data/v3/items'
+        url = nabase + '/lol/static-data/v3/items' + '?'
     url += key
     r = requests.get(url)
     return r
@@ -324,9 +314,9 @@ def mastery_static(mID=None):
     :return: Static mastery information
     """
     if mID is not None:
-        url = nabase + '/lol/static-data/v3/masteries/' + str(mID)
+        url = nabase + '/lol/static-data/v3/masteries/' + str(mID) + '?'
     else:
-        url = nabase + '/lol/static-data/v3/masteries'
+        url = nabase + '/lol/static-data/v3/masteries' + '?'
     url += key
     r = requests.get(url)
     return r
@@ -340,9 +330,9 @@ def rune_static(rID=None):
     :return: Static rune information
     """
     if rID is not None:
-        url = nabase + '/lol/static-data/v3/runes/' + str(rID)
+        url = nabase + '/lol/static-data/v3/runes/' + str(rID) + '?'
     else:
-        url = nabase + '/lol/static-data/v3/runes'
+        url = nabase + '/lol/static-data/v3/runes' + '?'
     url += key
     r = requests.get(url)
     return r
@@ -356,9 +346,9 @@ def spell_static(ssID=None):
     :return: Static summoner spell information
     """
     if ssID is not None:
-        url = nabase + '/lol/static-data/v3/summoner-spells/' + str(ssID)
+        url = nabase + '/lol/static-data/v3/summoner-spells/' + str(ssID) + '?'
     else:
-        url = nabase + '/lol/static-data/v3/summoner-spells'
+        url = nabase + '/lol/static-data/v3/summoner-spells' + '?'
     url += key
     r = requests.get(url)
     return r
@@ -372,7 +362,8 @@ def string_static(lang=None):
     :return: Returns strings localized to given language (default is English)
     """
     if lang is not None:
-        url = nabase + '/lol/static-data/v3/language-strings' + '?locale=' + str(lang) + '&'
+        url = nabase + '/lol/static-data/v3/language-strings' + '?locale=' + \
+         str(lang) + '&'
     else:
         url = nabase + '/lol/static-data/v3/language-strings' + '?'
     url += key
