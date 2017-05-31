@@ -8,7 +8,10 @@ from riotcall import league
 
 
 def main():
-    r = league.item_static()
+    key = 'RGAPI-5593b315-1fc8-4ad8-be9e-45474b1f7308'
+
+    r = league.item_static(key)
+
     if r.status_code != 200:                                            # Ensure the request was successful
         sys.stderr.write("Unsuccessful API call %d\nPlease try again later" % r.status_code)
         sys.exit(1)
